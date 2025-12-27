@@ -13,6 +13,23 @@ This repository analyzes a dataset of top-rated movies to perform exploratory da
   - `Trm_EDA_FE.ipynb` — EDA and feature engineering (creates cleaned CSV)
   - `model_training.ipynb` — model training and evaluation (saves `rfr_model.pkl`)
 - `model/` — where the model is stored
+- `application.py` — small Flask API to serve predictions and list top movies
+- `requirements.txt` — minimal dependencies for running the app
+
+## Running the Flask app 🔧
+
+1. Install dependencies:
+
+```powershell
+pip install -r requirements.txt
+```
+
+2. Run the app:
+
+```powershell
+python application.py
+```
+
 
 
 

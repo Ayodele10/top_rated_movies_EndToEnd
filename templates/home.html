@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Movie Rating Prediction</title>
+        <style>
+            body { font-family: Arial, Helvetica, sans-serif; max-width: 800px; margin: 20px auto; }
+            label { display:block; margin:8px 0 4px; }
+            input[type="text"], input[type="number"] { width: 100%; padding:6px; }
+            .row { margin-bottom: 10px; }
+            .small { font-size: 0.9em; color: #555; }
+            .result { margin-top: 16px; padding: 10px; background: #f2f8ff; border:1px solid #cfe3ff; }
+        </style>
+    </head>
+    <body>
+        <h1>Movie Rating Prediction</h1>
+
+        {% if error %}
+            <p style="color:red">{{ error }}</p>
+        {% endif %}
+
+        <form action="{{ url_for('predict') }}" method="post">
+            <div class="row">
+                <label for="id">id (int)</label>
+                <input type="number" id="id" name="id" placeholder="e.g. 278" value="{{ values.id|default('') }}">
+            </div>
+
+            <div class="row">
+                <label for="vote_average">vote_average (float)</label>
+                <input type="text" id="vote_average" name="vote_average" placeholder="e.g. 8.5" value="{{ values.vote_average|default('') }}">
+            </div>
+
+            <div class="row">
+                <label for="vote_count">vote_count (int)</label>
+                <input type="number" id="vote_count" name="vote_count" placeholder="e.g. 29158" value="{{ values.vote_count|default('') }}">
+            </div>
+
+            <div class="row">
+                <label for="year">year (int)</label>
+                <input type="number" id="year" name="year" placeholder="e.g. 1994" value="{{ values.year|default('') }}">
+            </div>
+
+            <div class="row">
+                <label for="month">month (int)</label>
+                <input type="number" id="month" name="month" placeholder="1-12" value="{{ values.month|default('') }}">
+            </div>
+
+            <div class="row">
+                <label for="day">day (int)</label>
+                <input type="number" id="day" name="day" placeholder="1-31" value="{{ values.day|default('') }}">
+            </div>
+
+            <div class="row">
+                <label for="weighted_rating">weighted_rating (float)</label>
+                <input type="text" id="weighted_rating" name="weighted_rating" placeholder="e.g. 8.54" value="{{ values.weighted_rating|default('') }}">
+            </div>
+
+            <div class="row">
+                <label for="is_sequel">is_sequel (0 or 1)</label>
+                <input type="number" id="is_sequel" name="is_sequel" min="0" max="1" placeholder="0 or 1" value="{{ values.is_sequel|default('0') }}">
+                <div class="small">Enter 1 if sequel, otherwise 0</div>
+            </div>
+
+            <div class="row">
+                <label for="engagement_score">engagement_score (float)</label>
+                <input type="text" id="engagement_score" name="engagement_score" placeholder="e.g. 220.66" value="{{ values.engagement_score|default('') }}">
+            </div>
+
+            <div class="row">
+                <button type="submit">Predict</button>
+            </div>
+        </form>
+
+        {% if results is not none %}
+            <div class="result">
+                <strong>Predicted popularity:</strong> {{ results }}
+            </div>
+        {% endif %}
+
+    </body>
+</html>
